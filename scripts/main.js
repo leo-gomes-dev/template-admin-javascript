@@ -17,7 +17,7 @@ function loginUser(e) {
   }
 
   // validar se a senha esta correta
-  if (email.value === 'leo@teste.com' && password.value === '123456') {
+  if (email.value === 'aluno@fullstack.dev' && password.value === '123456') {
     window.location.href = 'pages/dashboard/dashboard.html';
 
     console.log(`Sejam bem vindo ${email}`);
