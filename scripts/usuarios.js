@@ -1,7 +1,6 @@
-```javascript
-// ==========================================
+
 // 1. REFERÊNCIAS DOS ELEMENTOS HTML
-// ==========================================
+
 
 // Selecionar o corpo da tabela de usuários.
 
@@ -10,17 +9,17 @@
 // Selecionar os campos de nome, e-mail e administrador.
 
 
-// ==========================================
+
 // 2. CONTROLE DE EDIÇÃO
-// ==========================================
+
 
 // Criar uma variável para guardar a linha que está sendo editada.
 // Exemplo: let linhaEmEdicao = null;
 
 
-// ==========================================
+
 // 3. EVENTO DO FORMULÁRIO
-// ==========================================
+
 
 // Adicionar um evento de envio (submit) ao formulário.
 
@@ -29,9 +28,9 @@
 // Chamar a função responsável por salvar os dados.
 
 
-// ==========================================
+
 // 4. FUNÇÃO PARA CADASTRAR E ATUALIZAR
-// ==========================================
+
 
 function saveData(e) {
 
@@ -81,9 +80,9 @@ function saveData(e) {
 }
 
 
-// ==========================================
+
 // 5. FUNÇÃO PARA EXCLUIR UM USUÁRIO
-// ==========================================
+
 
 function deletar(linha) {
 
@@ -99,9 +98,9 @@ function deletar(linha) {
 }
 
 
-// ==========================================
+
 // 6. FUNÇÃO PARA OBTER OS DADOS DA LINHA
-// ==========================================
+
 
 function obterDadosDaLinha(linha) {
 
@@ -118,9 +117,9 @@ function obterDadosDaLinha(linha) {
 }
 
 
-// ==========================================
+
 // 7. FUNÇÃO PARA EDITAR UM USUÁRIO
-// ==========================================
+
 
 function editar(linha) {
 
@@ -138,9 +137,9 @@ function editar(linha) {
 }
 
 
-// ==========================================
+
 // 8. ATUALIZAR AS ESTATÍSTICAS DO PAINEL
-// ==========================================
+
 
 // Criar uma função chamada atualizarEstatisticas().
 
@@ -168,4 +167,4 @@ function editar(linha) {
 
 // Evitar incrementar ou diminuir manualmente sem verificar
 // o estado atual da tabela. Recalcular os totais evita erros.
-```;
+;

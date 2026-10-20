@@ -1,31 +1,61 @@
 
 
-const form = document.querySelector('#login-form');
-const email = document.querySelector('#login-email');
-const password = document.querySelector('#login-password');
+// 1. REFERÊNCIAS DOS ELEMENTOS HTML
 
 
-// Evento de escuta do formulario
-form.addEventListener('submit', loginUser);
+// Selecionar o formulário de login.
 
-// Função para Logar User
+// Selecionar o campo de e-mail.
+
+// Selecionar o campo de senha.
+
+
+
+// 2. EVENTO DO FORMULÁRIO
+
+
+// Adicionar um evento de escuta (submit) ao formulário.
+
+// Chamar a função loginUser quando o formulário for enviado.
+
+
+
+// 3. FUNÇÃO DE LOGIN
+
+
 function loginUser(e) {
-  e.preventDefault();
 
-  // validar se os campos foram preenchidos
-  if (email.value === '' && password.value === '') {
-    // precisamos alertar o usuario para preencher os campos
+  // Impedir que a página seja recarregada ao enviar o formulário.
 
-    alert('Preencha os campos para prosseguir');
-  }
+  // Capturar o e-mail digitado pelo usuário.
 
-  // validar se a senha esta correta
-  if (email.value === 'aluno@fullstack.dev' && password.value === '123456') {
-    window.location.href = 'pages/dashboard/dashboard.html';
+  // Capturar a senha digitada pelo usuário.
 
-    console.log(`Sejam bem vindo ${email}`);
-  } else {
-    alert('Email ou senha esta incorreto');
-    return;
-  }
+
+
+  // 4. VALIDAR OS CAMPOS
+
+
+  // Verificar se o e-mail ou a senha estão vazios.
+
+  // Se algum campo estiver vazio:
+  // - Exibir um alerta solicitando o preenchimento.
+  // - Interromper a execução da função com return.
+
+
+
+  // 5. VALIDAR AS CREDENCIAIS
+
+
+  // Comparar o e-mail e a senha digitados com as credenciais
+  // de teste definidas para esta atividade.
+
+  // Se as credenciais estiverem corretas:
+  // - Exibir uma mensagem de boas-vindas no console.
+  // - Redirecionar o usuário para a página do dashboard.
+
+  // Se as credenciais estiverem incorretas:
+  // - Exibir um alerta informando o erro.
+  // - Interromper a execução da função.
 }
+
