@@ -1,6 +1,9 @@
+
+
 const form = document.querySelector('#login-form');
 const email = document.querySelector('#login-email');
 const password = document.querySelector('#login-password');
+
 
 // Evento de escuta do formulario
 form.addEventListener('submit', loginUser);
