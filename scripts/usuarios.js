@@ -1,145 +1,121 @@
-
 // 1. REFERÊNCIAS DOS ELEMENTOS HTML
 
+const userForm = document.querySelector('#user-form');
+const userName = document.querySelector('#user-name');
+const userEmail = document.querySelector('#user-email');
+const userAdmin = document.querySelector('#user-admin');
 
-// Selecionar o corpo da tabela de usuários.
+// referenciando os campos da tabela
+const table = document.querySelector('#table-users-body');
 
-// Selecionar o formulário de cadastro.
+let linhaEmEdicao = null;
 
-// Selecionar os campos de nome, e-mail e administrador.
-
-
-
-// 2. CONTROLE DE EDIÇÃO
-
-
-// Criar uma variável para guardar a linha que está sendo editada.
-// Exemplo: let linhaEmEdicao = null;
-
-
-
-// 3. EVENTO DO FORMULÁRIO
-
-
-// Adicionar um evento de envio (submit) ao formulário.
-
-// Impedir que a página seja recarregada ao enviar o formulário.
-
-// Chamar a função responsável por salvar os dados.
-
-
-
-// 4. FUNÇÃO PARA CADASTRAR E ATUALIZAR
-
+if (userForm) {
+  userForm.addEventListener('submit', saveData);
+}
 
 function saveData(e) {
+  e.preventDefault();
 
-  // Impedir o comportamento padrão do formulário.
+  let name = userName.value.trim();
+  let email = userEmail.value.trim();
+  let admin = userAdmin.checked ? 'Sim' : 'Não';
 
-  // Capturar o nome digitado pelo usuário.
+  if (linhaEmEdicao) {
+    // editando..
+    const dados = obterDadosDaLinha(linhaEmEdicao);
 
-  // Capturar o e-mail digitado pelo usuário.
+    dados[0].textContent = 'Foto';
+    dados[1].textContent = name;
+    dados[2].textContent = email;
+    dados[3].textContent = admin;
 
-  // Verificar se a opção de administrador está marcada.
-  // Exemplo: marcado = "Sim"; desmarcado = "Não".
-
-
-  // Verificar se existe uma linha em edição.
-
-  if (/* verificar se existe uma linha em edição */) {
-
-    // Recuperar os dados da linha que será atualizada.
-
-    // Atualizar o nome, o e-mail e o status de administrador
-    // nas células correspondentes da tabela.
-
-    // Limpar a variável de controle de edição.
-
-    // Exibir uma mensagem de atualização bem-sucedida.
-
+    linhaEmEdicao = null;
+    alert('Usuario atualizado com sucesso!');
   } else {
+    let tr = document.createElement('tr');
 
-    // Criar um novo elemento HTML <tr> para a tabela.
+    tr.innerHTML = `
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <button type="button" class="btn-excluir">Excluir</button>
+        <button type="button" class="btn-editar">Editar</button>
+      </td>
+    `;
 
-    // Inserir as células com:
-    // imagem, nome, e-mail, administrador e ações.
+    const celulas = tr.querySelectorAll('td');
 
-    // Criar os botões Editar e Excluir.
+    celulas[0].textContent = 'Foto';
+    celulas[1].textContent = name;
+    celulas[2].textContent = email;
+    celulas[3].textContent = admin;
 
-    // Adicionar um evento de clique ao botão Editar.
+    const btnExcluir = tr.querySelector('.btn-excluir');
+    const btnEditar = tr.querySelector('.btn-editar');
 
-    // Adicionar um evento de clique ao botão Excluir.
+    btnExcluir.addEventListener('click', () => deletar(tr));
+    btnEditar.addEventListener('click', () => editar(tr));
 
-    // Adicionar a nova linha ao corpo da tabela.
-
+    table.appendChild(tr);
+    alert('Usuario cadastrado');
   }
 
-  // Atualizar as estatísticas do painel administrativo.
+  userForm.reset();
 
-  // Limpar os campos do formulário.
+  atualizarEstatisticas();
 }
 
-
-
-// 5. FUNÇÃO PARA EXCLUIR UM USUÁRIO
-
-
-function deletar(linha) {
-
-  // Verificar se a linha excluída está sendo editada.
-
-  // Se estiver, limpar o controle de edição e o formulário.
-
-  // Remover a linha da tabela.
-
-  // Atualizar as estatísticas do painel administrativo.
-
-  // Exibir uma mensagem de confirmação.
+// obter os dados
+function obterDadosDaLinha(tr) {
+  return tr.querySelectorAll('td');
 }
 
+// Deletar
+function deletar(tr) {
+  tr.remove();
 
+  console.log('Usuário deletado:', tr);
 
-// 6. FUNÇÃO PARA OBTER OS DADOS DA LINHA
-
-
-function obterDadosDaLinha(linha) {
-
-  // Selecionar todas as células (<td>) da linha recebida.
-
-  // Recuperar o nome do usuário.
-
-  // Recuperar o e-mail do usuário.
-
-  // Verificar se o usuário é administrador.
-
-  // Retornar os dados encontrados para serem utilizados
-  // pelas funções de edição e atualização.
+  atualizarEstatisticas();
 }
 
+// Editar
+function editar(tr) {
+  linhaEmEdicao = tr;
 
+  const dados = obterDadosDaLinha(tr);
 
-// 7. FUNÇÃO PARA EDITAR UM USUÁRIO
-
-
-function editar(linha) {
-
-  // Guardar a linha que será editada.
-
-  // Recuperar os dados da linha usando obterDadosDaLinha().
-
-  // Preencher o campo de nome com os dados encontrados.
-
-  // Preencher o campo de e-mail com os dados encontrados.
-
-  // Marcar ou desmarcar a opção de administrador.
-
-  // Colocar o foco no campo de nome.
+  userName.value = dados[1].textContent;
+  userEmail.value = dados[2].textContent;
+  userAdmin.checked = dados[3].textContent === 'Sim';
 }
 
+// ATUALIZAR AS ESTATÍSTICAS DO PAINEL
+function atualizarEstatisticas() {
+  const linhas = table.querySelectorAll('tr');
 
+  const total = linhas.length;
+
+  let adminCount = 0;
+
+  linhas.forEach((linha) => {
+    const colunas = obterDadosDaLinha(linha);
+    if (colunas[3] && colunas[3].textContent === 'Sim') {
+      adminCount++;
+    }
+  });
+
+  const totalUsuarios = document.querySelector('#count-users');
+  const totalAdmin = document.querySelector('#count-admins');
+
+  if (totalUsuarios) totalUsuarios.textContent = total;
+  if (totalAdmin) totalAdmin.textContent = adminCount;
+}
 
 // 8. ATUALIZAR AS ESTATÍSTICAS DO PAINEL
-
 
 // Criar uma função chamada atualizarEstatisticas().
 
@@ -167,4 +143,3 @@ function editar(linha) {
 
 // Evitar incrementar ou diminuir manualmente sem verificar
 // o estado atual da tabela. Recalcular os totais evita erros.
-;
